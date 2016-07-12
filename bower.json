@@ -1,7 +1,7 @@
 {
   "name": "ng-resource-etag",
   "version": "1.4.3",
-  "main": "./ng-resource-etag.js",
+  "main": "./resource.js",
   "ignore": [],
   "dependencies": {
     "angular": "1.4.3"

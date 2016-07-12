@@ -574,7 +574,7 @@ angular.module('ngResource', ['ng']).
                 httpConfig.headers = {};
               }
 
-              httpConfig.headers['If-Match'] = data[action.ifMatch];
+              if (data) httpConfig.headers['If-Match'] = data[action.ifMatch];
             }
 
             if (hasBody) httpConfig.data = data;

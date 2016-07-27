@@ -118,8 +118,8 @@ function shallowClearAndCopy(src, dst) {
  *   the default set of resource actions. The declaration should be created in the format of {@link
  *   ng.$http#usage $http.config}:
  *
- *       {action1: {method:?, params:?, isArray:?, headers:?, ...},
- *        action2: {method:?, params:?, isArray:?, headers:?, ...},
+ *       {action1: {method:?, params:?, isArray:?, ifMatch:?, headers:?, ...},
+ *        action2: {method:?, params:?, isArray:?, ifMatch:?, headers:?, ...},
  *        ...}
  *
  *   Where:
@@ -135,6 +135,8 @@ function shallowClearAndCopy(src, dst) {
  *     like for the resource-level urls.
  *   - **`isArray`** – {boolean=} – If true then the returned object for this action is an array,
  *     see `returns` section.
+ *   - **`ifMatch`** – {string} – The key containing eTag to be set on If-Match
+ *     request header.
  *   - **`transformRequest`** –
  *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
  *     transform function or an array of such functions. The transform function takes the http
@@ -647,6 +649,7 @@ angular.module('ngResource', ['ng']).
                   break;
                 case 'params':
                 case 'isArray':
+                case 'ifMatch':
                 case 'interceptor':
                 case 'cancellable':
                   break;
@@ -660,6 +663,14 @@ angular.module('ngResource', ['ng']).
               if (numericTimeout) {
                 numericTimeoutPromise = $timeout(timeoutDeferred.resolve, numericTimeout);
               }
+            }
+
+            if (angular.isDefined(action.ifMatch) && angular.isDefined(data)) {
+              if (!angular.isDefined(httpConfig.headers)) {
+                httpConfig.headers = {};
+              }
+
+              httpConfig.headers['If-Match'] = data[action.ifMatch];
             }
 
             if (hasBody) httpConfig.data = data;

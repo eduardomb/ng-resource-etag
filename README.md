@@ -1,6 +1,6 @@
 # ng-resource-etag
 
-This is a fork of [AngularJS 1.4.3 ng-resource module](https://github.com/angular/angular.js/blob/v1.4.3/src/ngResource/resource.js) to support **eTag** on **If-Match** header.
+This is a fork of [AngularJS 1.5.3 ng-resource module](https://github.com/angular/angular.js/blob/v1.5.3/src/ngResource/resource.js) to support **eTag** on **If-Match** header.
 
 ## Install
 ```shell
